@@ -79,3 +79,5 @@ def available_times():
                 except:
                     times = bus_times[index:]
                 return times
+    
+    return []
