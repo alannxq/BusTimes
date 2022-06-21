@@ -3,8 +3,8 @@ import bustimes
 
 app = Flask(__name__)
 
-def get_bus_times():
-    times = bustimes.available_times()
+def get_bus_times(location):
+    times = bustimes.available_times(location)
     result = []
     if len(times) > 0:
         for time in times:
@@ -21,8 +21,13 @@ def get_bus_times():
     return result
 
 @app.route("/")
-def main():
-    result = get_bus_times()
+def uxbridge():
+    result = get_bus_times("uxbridge")
     return render_template("index.html", closest_time = result[0], other_times=result[1:])
 
+@app.route("/cippenham")
+def cippenham():
+    result = get_bus_times("cippenham")
+    return render_template("cippenham.html", closest_time = result[0], other_times=result[1:])
+    
 app.run(host="0.0.0.0", port="80")

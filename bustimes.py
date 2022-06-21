@@ -31,7 +31,7 @@ class Time:
 
 
 ## UXBRIDGE TO SLOUGH
-bus_times = [
+UTS_bus_times = [
     Time(6,25),
     Time(6,45),
     Time(7,20),
@@ -60,6 +60,35 @@ bus_times = [
     Time(19,37)
 ]
 
+CTS_bus_times = [
+    Time(6,13),
+    Time(6,46),
+    Time(7,11),
+    Time(7,49),
+    Time(8,23),
+    Time(8,48),
+    Time(9,23),
+    Time(9,48),
+    Time(10,23),
+    Time(10,48),
+    Time(11,23),
+    Time(11,48),
+    Time(12,23),
+    Time(12,48),
+    Time(13,23),
+    Time(13,48),
+    Time(14,23),
+    Time(14,53),
+    Time(15,27),
+    Time(15,53),
+    Time(16,27),
+    Time(16,53),
+    Time(17,27),
+    Time(17,53),
+    Time(18,27),
+    Time(18,57),
+    Time(19,27)
+]
 
 def get_current_time():
     now = datetime.now()
@@ -69,7 +98,12 @@ def get_current_time():
     return time
 
 
-def available_times():
+def available_times(location):
+    if location == "cippenham":
+        bus_times = CTS_bus_times
+    else:
+        bus_times = UTS_bus_times
+
     for index, btime in enumerate(bus_times):
         if btime.hour >= get_current_time().hour:
             if btime.hour > get_current_time().hour or btime.minute > get_current_time().minute:
